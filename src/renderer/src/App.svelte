@@ -1,6 +1,26 @@
 <script lang="ts">
   import icons from './assets/icons.svg'
   import Versions from './components/Versions.svelte'
+
+  // 10 funny fake crash messages
+  const crashMessages = [
+    'Unexpected error occurred at line 42',
+    'Null pointer exception at line 123',
+    'Out of memory error',
+    'Stack overflow error at line 256',
+    'Array index out of bounds at line 78',
+    'Illegal argument exception at line 90',
+    'Divide by zero error at line 36',
+    'Timeout error',
+    'Infinite loop detected at line 150',
+    'Type mismatch error at line 200'
+  ]
+
+  function crashMe() {
+    const msg = crashMessages[Math.floor(Math.random() * crashMessages.length)]
+    alert(msg)
+    throw new Error(msg)
+  }
 </script>
 
 <div class="container">
@@ -10,17 +30,20 @@
     <use xlink:href={`${icons}#electron`} />
   </svg>
   <h2 class="hero-text">
-    You've successfully created an Electron project with Svelte and TypeScript
+    <button class="crash-btn" on:click={crashMe}>Crash me</button>
   </h2>
   <p class="hero-tagline">Please try pressing <code>F12</code> to open the devTool</p>
 
   <div class="links">
     <div class="link-item">
-      <a rel="noopener noreferrer" target="_blank" href="https://electron-vite.org">Documentation</a>
+      <a rel="noopener noreferrer" target="_blank" href="https://electron-vite.org">Documentation</a
+      >
     </div>
     <div class="link-item link-dot">•</div>
     <div class="link-item">
-      <a rel="noopener noreferrer" target="_blank" href="https://github.com/alex8088/electron-vite">Getting Help</a>
+      <a rel="noopener noreferrer" target="_blank" href="https://github.com/alex8088/electron-vite"
+        >Getting Help</a
+      >
     </div>
     <div class="link-item link-dot">•</div>
     <div class="link-item">
@@ -40,7 +63,9 @@
         <h2 class="title">Configuring</h2>
         <p class="detail">
           Config with <span>electron.vite.config.ts</span> and refer to the
-          <a rel="noopener noreferrer" target="_blank" href="https://electron-vite.org/config">config guide</a>.
+          <a rel="noopener noreferrer" target="_blank" href="https://electron-vite.org/config"
+            >config guide</a
+          >.
         </p>
       </article>
     </div>
@@ -49,7 +74,11 @@
         <h2 class="title">HMR</h2>
         <p class="detail">
           Edit <span>src/renderer</span> files to test HMR. See
-          <a rel="noopener noreferrer" target="_blank" href="https://electron-vite.org/guide/hmr.html">docs</a>.
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://electron-vite.org/guide/hmr.html">docs</a
+          >.
         </p>
       </article>
     </div>
@@ -58,7 +87,11 @@
         <h2 class="title">Hot Reloading</h2>
         <p class="detail">
           Run <span>'electron-vite dev --watch'</span> to enable. See
-          <a rel="noopener noreferrer" target="_blank" href="https://electron-vite.org/guide/hot-reloading.html">docs</a>.
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://electron-vite.org/guide/hot-reloading.html">docs</a
+          >.
         </p>
       </article>
     </div>
@@ -67,7 +100,11 @@
         <h2 class="title">Debugging</h2>
         <p class="detail">
           Check out <span>.vscode/launch.json</span>. See
-          <a rel="noopener noreferrer" target="_blank" href="https://electron-vite.org/guide/debugging.html">docs</a>.
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://electron-vite.org/guide/debugging.html">docs</a
+          >.
         </p>
       </article>
     </div>
@@ -76,7 +113,11 @@
         <h2 class="title">Source Code Protection</h2>
         <p class="detail">
           Supported via built-in plugin <span>bytecodePlugin</span>. See
-          <a rel="noopener noreferrer" target="_blank" href="https://electron-vite.org/guide/source-code-protection.html">
+          <a
+            rel="noopener noreferrer"
+            target="_blank"
+            href="https://electron-vite.org/guide/source-code-protection.html"
+          >
             docs
           </a>
           .
@@ -88,7 +129,9 @@
         <h2 class="title">Packaging</h2>
         <p class="detail">
           Use
-          <a rel="noopener noreferrer" target="_blank" href="https://www.electron.build">electron-builder</a>
+          <a rel="noopener noreferrer" target="_blank" href="https://www.electron.build"
+            >electron-builder</a
+          >
           and pre-configured to pack your app.
         </p>
       </article>
@@ -218,5 +261,15 @@
     .features .feature-item {
       width: 100%;
     }
+  }
+
+  .crash-btn {
+    padding: 8px 40px;
+    border-radius: 4px;
+    background: white;
+    color: black;
+    border: 0;
+    font-size: 16px;
+    margin: 10px 0;
   }
 </style>
