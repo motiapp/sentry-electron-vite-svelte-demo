@@ -1,25 +1,24 @@
 <script lang="ts">
-  import icons from './assets/icons.svg'
-  import Versions from './components/Versions.svelte'
+  import icons from './assets/icons.svg';
+  import Versions from './components/Versions.svelte';
 
-  // 10 funny fake crash messages
-  const crashMessages = [
-    'Unexpected error occurred at line 42',
-    'Null pointer exception at line 123',
-    'Out of memory error',
-    'Stack overflow error at line 256',
-    'Array index out of bounds at line 78',
-    'Illegal argument exception at line 90',
-    'Divide by zero error at line 36',
-    'Timeout error',
-    'Infinite loop detected at line 150',
-    'Type mismatch error at line 200'
-  ]
+  let rendererDidCrash = false;
+  let mainDidCrash = false;
 
-  function crashMe() {
-    const msg = crashMessages[Math.floor(Math.random() * crashMessages.length)]
-    alert(msg)
-    throw new Error(msg)
+  function crashRenderer() {
+    rendererDidCrash = true;
+    setTimeout(() => {
+      rendererDidCrash = false;
+    }, 1000);
+    throw new Error('Renderer crashes are fun');
+  }
+
+  function crashMain() {
+    mainDidCrash = true;
+    setTimeout(() => {
+      mainDidCrash = false;
+    }, 1000);
+    window.api.crashMain();
   }
 </script>
 
@@ -30,7 +29,10 @@
     <use xlink:href={`${icons}#electron`} />
   </svg>
   <h2 class="hero-text">
-    <button class="crash-btn" on:click={crashMe}>Crash me</button>
+    <button class="crash-btn" disabled={rendererDidCrash} on:click={crashRenderer}
+      >Crash in Renderer</button
+    >
+    <button class="crash-btn" disabled={mainDidCrash} on:click={crashMain}>Crash in Main</button>
   </h2>
   <p class="hero-tagline">Please try pressing <code>F12</code> to open the devTool</p>
 
@@ -271,5 +273,8 @@
     border: 0;
     font-size: 16px;
     margin: 10px 0;
+  }
+  .crash-btn:disabled {
+    opacity: 0.3;
   }
 </style>

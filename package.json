@@ -23,11 +23,14 @@
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
     "@sentry/electron": "^4.17.0",
+    "@sentry/vite-plugin": "^2.14.0",
     "electron-updater": "^6.1.7"
   },
   "devDependencies": {
     "@electron-toolkit/tsconfig": "^1.0.1",
     "@electron/notarize": "^2.2.1",
+    "@sentry/react": "^7.101.0",
+    "@sentry/svelte": "^7.101.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
     "@types/node": "^20.11.17",
     "@typescript-eslint/eslint-plugin": "^7.0.1",
