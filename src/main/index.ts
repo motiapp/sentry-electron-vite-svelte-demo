@@ -6,6 +6,16 @@ import * as Sentry from '@sentry/electron';
 
 Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
+  tracesSampleRate: 1.0,
+  debug: true,
+  beforeSend: (event) => {
+    console.log('beforeSend in main', event);
+    return event;
+  },
+  beforeSendTransaction: (transaction) => {
+    console.log('beforeSendTransaction in main', transaction);
+    return transaction;
+  },
 });
 
 function createWindow(): void {

@@ -6,6 +6,16 @@ require('@sentry/electron/preload');
 
 Sentry.init({
   dsn: import.meta.env.VITE_SENTRY_DSN,
+  tracesSampleRate: 1.0,
+  debug: true,
+  beforeSend: (event) => {
+    console.log('beforeSend in preload', event);
+    return event;
+  },
+  beforeSendTransaction: (transaction) => {
+    console.log('beforeSendTransaction in preload', transaction);
+    return transaction;
+  },
 });
 
 // Custom APIs for renderer
